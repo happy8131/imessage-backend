@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/happy8131/imessage-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/happy8131/imessage-backend/issues"
+  },
+  "homepage": "https://github.com/happy8131/imessage-backend#readme",
+  "dependencies": {
+    "apollo-server-core": "^3.12.0",
+    "apollo-server-express": "^3.12.0",
+    "express": "^4.18.2",
+    "graphql": "^16.8.0"
+  }
+}
