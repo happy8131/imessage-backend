@@ -33,7 +33,7 @@ async function main() {
     cache: "bounded",
     context: async ({ req, res }): Promise<GraphQLContext> => {
       const session = await getSession({ req });
-
+      console.log(session);
       return { session };
     },
     plugins: [
