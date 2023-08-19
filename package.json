@@ -19,6 +19,7 @@
   "homepage": "https://github.com/happy8131/imessage-backend#readme",
   "dependencies": {
     "@graphql-tools/schema": "^10.0.0",
+    "@prisma/client": "^5.1.1",
     "apollo-server-core": "^3.12.0",
     "apollo-server-express": "^3.12.0",
     "dotenv": "^16.3.1",
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@types/lodash.merge": "^4.6.7",
     "nodemon": "^3.0.1",
+    "prisma": "^5.1.1",
     "typescript": "^5.1.6"
   }
 }
