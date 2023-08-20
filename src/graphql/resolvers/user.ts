@@ -23,14 +23,10 @@ const resolvers = {
       try {
         const users = await prisma.user.findMany({
           where: {
-            username: {
-              contains: searchedUsername,
-              not: myUsername,
-              mode: "insensitive",
-            },
+            username: searchedUsername,
           },
         });
-
+        console.log(users);
         return users;
       } catch (error: any) {
         console.log("error", error);
