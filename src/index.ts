@@ -12,6 +12,7 @@ import resolvers from "./graphql/resolvers";
 import { getSession } from "next-auth/react";
 import { GraphQLContext, Session } from "./util/types";
 import * as dotenv from "dotenv";
+import { PrismaClient } from "@prisma/client";
 
 async function main() {
   dotenv.config();

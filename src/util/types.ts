@@ -24,3 +24,8 @@ export interface CreateUsernameResponse {
   success?: boolean;
   error?: string;
 }
+
+export interface SearchUsersResponse {
+  users: Array<User>;
+
+}
