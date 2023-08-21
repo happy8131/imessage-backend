@@ -26,7 +26,7 @@ const resolvers = {
             username: searchedUsername,
           },
         });
-        console.log(users);
+
         return users;
       } catch (error: any) {
         console.log("error", error);
