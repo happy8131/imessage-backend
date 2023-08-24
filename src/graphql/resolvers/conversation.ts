@@ -7,7 +7,7 @@ const resolvers = {
       _: any,
       args: { participantIds: Array<string> },
       context: GraphQLContext
-    ): Promise<{ conversationid: string }> => {
+    ): Promise<{ conversationId: string }> => {
       console.log("INSIDE CREATE CONVERSATION", args);
       const { session, prisma } = context;
       const { participantIds } = args;
@@ -36,7 +36,7 @@ const resolvers = {
         });
 
         return {
-          conversationid: conversation.id,
+          conversationId: conversation.id,
         };
       } catch (error) {
         console.log("CreateConversation Err", error);
