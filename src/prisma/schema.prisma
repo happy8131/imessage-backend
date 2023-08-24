@@ -59,7 +59,7 @@ model VerificationToken {
 
 model Conversation {
    id              String  @id @default(auto()) @map("_id") @db.ObjectId
-   messages        Message[]
+   messages        Message[] @relation("conversationMessages")
    participants    ConversationParticipant[]
    latestMessageId String? @unique
    latestMessage   Message?   @relation(name: "latestConversationMessage", fields: [latestMessageId], references: [id], onUpdate: NoAction, onDelete: NoAction)
