@@ -1,10 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import { makeExecutableSchema } from "@graphql-tools/schema";
 import { ApolloServer } from "apollo-server-express";
 import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault,
 } from "apollo-server-core";
-import { makeExecutableSchema } from "@graphql-tools/schema";
 import express from "express";
 import http from "http";
 import typeDefs from "./graphql/typeDefs";
@@ -12,28 +11,25 @@ import resolvers from "./graphql/resolvers";
 import { getSession } from "next-auth/react";
 import { GraphQLContext, Session, SubscriptionContext } from "./util/types";
 import { WebSocketServer } from "ws";
+import { PubSub } from "graphql-subscriptions";
 import { useServer } from "graphql-ws/lib/use/ws";
 import * as dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
-import { PubSub } from "graphql-subscriptions";
 
 async function main() {
   dotenv.config();
   const app = express();
   const httpServer = http.createServer(app);
 
-  // Creating the WebSocket server
-  const wsServer = new WebSocketServer({
-    // This is the `httpServer` we created in a previous step.
-    server: httpServer,
-    // Pass a different path here if app.use
-    // serves expressMiddleware at a different path
-    path: "/graphql/subscriptions",
-  });
-
   const schema = makeExecutableSchema({
     typeDefs,
     resolvers,
+  });
+
+  // Creating the WebSocket server
+  const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: "/graphql/subscriptions",
   });
 
   const prisma = new PrismaClient();
