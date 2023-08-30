@@ -1,9 +1,9 @@
+import { Prisma, PrismaClient } from "@prisma/client";
+import { PubSub } from "graphql-subscriptions";
 import {
   conversationPopulated,
   participantPopulated,
 } from "./../graphql/resolvers/conversation";
-import { PubSub } from "graphql-subscriptions";
-import { Prisma, PrismaClient } from "@prisma/client";
 import { ISODateString } from "next-auth";
 import { Context } from "graphql-ws/lib/server";
 
@@ -51,6 +51,6 @@ export type ConversationPopulated = Prisma.ConversationGetPayload<{
   include: typeof conversationPopulated;
 }>;
 
-export type ParticipantPupulated = Prisma.ConversationParticipantGetPayload<{
+export type ParticipantPopulated = Prisma.ConversationParticipantGetPayload<{
   include: typeof participantPopulated;
 }>;
