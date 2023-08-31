@@ -18,15 +18,17 @@
   },
   "homepage": "https://github.com/happy8131/imessage-backend#readme",
   "dependencies": {
+    "@apollo/server": "^4.9.3",
     "@auth/prisma-adapter": "^1.0.1",
     "@graphql-tools/schema": "^10.0.0",
     "@prisma/client": "^5.2.0",
-    "apollo-server-core": "^3.12.0",
-    "apollo-server-express": "^3.12.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "graphql": "^16.8.0",
     "graphql-subscriptions": "^2.0.0",
+    "graphql-tag": "^2.12.6",
     "graphql-ws": "^5.14.0",
     "lodash.merge": "^4.6.2",
     "next-auth": "^4.20.1",
@@ -36,6 +38,7 @@
     "ws": "^8.13.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/lodash.merge": "^4.6.7",
     "@types/ws": "^8.5.5",
     "nodemon": "^3.0.1",
