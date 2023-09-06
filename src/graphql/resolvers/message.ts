@@ -44,7 +44,7 @@ const resolvers = {
         conversation.participants,
         userId
       );
-
+      //대화 참가자에 내가 있는지 확인
       if (!allowedToView) {
         throw new GraphQLError("Not Authorized");
       }
@@ -143,7 +143,7 @@ const resolvers = {
           },
           include: conversationPopulated,
         });
-
+        //오더가 생성 됐어요
         pubsub.publish("MESSAGE_SENT", { messageSent: newMessage });
         // pubsub.publish("CONVERSATION_UPDATED", {
         //   conversationUpdated: {
@@ -163,7 +163,7 @@ const resolvers = {
       subscribe: withFilter(
         (_: any, __: any, context: GraphQLContext) => {
           const { pubsub } = context;
-          return pubsub.asyncIterator(["MESSAGE_SENT"]);
+          return pubsub.asyncIterator(["MESSAGE_SENT"]); //구독하고 있는 클라이언트에게 오더데이터 알려줄게요
         },
         (
           payload: MessageSentSubscriptionPayload,
