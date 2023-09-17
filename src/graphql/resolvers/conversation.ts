@@ -1,7 +1,12 @@
 import { GraphQLError } from "graphql";
 import { Prisma } from "@prisma/client";
 import { withFilter } from "graphql-subscriptions";
-import { ConversationPopulated, GraphQLContext } from "./../../util/types";
+import {
+  ConversationPopulated,
+  ConversationUpdatedSubscriptionPayload,
+  GraphQLContext,
+} from "./../../util/types";
+import { userIsConversationPraticipant } from "../../util/functions";
 const resolvers = {
   Query: {
     conversations: async (
@@ -153,16 +158,57 @@ const resolvers = {
           context: GraphQLContext
         ) => {
           const { session } = context;
+
           if (!session?.user) {
             throw new GraphQLError("Not authorized");
           }
-          const { id: userId } = session.user;
+
           const {
             conversationCreated: { participants },
           } = payload as any;
-          const userIsParticipant = !!participants.find(
-            (participant: { userId: string }) => participant.userId === userId
+
+          // const userIsParticipant = !!participants.find(
+          //   (participant: { userId: string }) => participant.userId === userId
+          // );
+
+          const userIsParticipant = userIsConversationPraticipant(
+            participants,
+            session?.user?.id
           );
+
+          return userIsParticipant;
+        }
+      ),
+    },
+    conversationUpdated: {
+      subscribe: withFilter(
+        (_: any, __: any, context: GraphQLContext) => {
+          const { pubsub } = context;
+          return pubsub.asyncIterator(["CONVERSATION_UPDATED"]);
+        },
+        (
+          payload: ConversationUpdatedSubscriptionPayload,
+          _: any,
+          context: GraphQLContext
+        ) => {
+          const { session } = context;
+          console.log("HE IS PALOAD", payload);
+          if (!session?.user) {
+            throw new GraphQLError("Not authorized");
+          }
+
+          const { id: userId } = session.user;
+          const {
+            conversationUpdated: {
+              conversation: { participants },
+            },
+          }: any = payload;
+
+          const userIsParticipant = userIsConversationPraticipant(
+            participants,
+            userId
+          );
+
           return userIsParticipant;
         }
       ),
