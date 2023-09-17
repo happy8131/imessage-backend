@@ -29,7 +29,7 @@ const resolvers = {
       } = session;
 
       //대화가 존재하는지 확인하고 사용자가 참가인지 확인
-      const conversation = await prisma.conversation.findUnique({
+      const conversation: any = await prisma.conversation.findUnique({
         where: {
           id: conversationId,
         },
@@ -145,11 +145,11 @@ const resolvers = {
         });
         //오더가 생성 됐어요
         pubsub.publish("MESSAGE_SENT", { messageSent: newMessage });
-        // pubsub.publish("CONVERSATION_UPDATED", {
-        //   conversationUpdated: {
-        //     conversation,
-        //   },
-        // });
+        pubsub.publish("CONVERSATION_UPDATED", {
+          conversationUpdated: {
+            conversation,
+          },
+        });
       } catch (err) {
         console.log("sendMessage err", err);
         throw new GraphQLError("ERR sending message");
