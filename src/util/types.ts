@@ -43,6 +43,7 @@ export interface CreateUsernameResponse {
 
 export interface SearchUsersResponse {
   users: Array<User>;
+
 }
 
 //Conversations
